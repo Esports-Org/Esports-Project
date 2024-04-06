@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const TeamShcema = mongoose.Schema({
+    name:String,
     players:{
         type:[
             {
