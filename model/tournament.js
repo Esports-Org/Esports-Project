@@ -74,14 +74,19 @@ const TournamentSchema = new mongoose.Schema({
         ],
         default:[]
     },
-    winners:{
-        type:[
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Team'
-            }
-        ],
-        default:[]
+    winningTeam:{
+        type:{ 
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Team'
+        },
+        default:{}
+    },
+    winningUser:{
+        type:{ 
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        default:{}
     }
 })
 
