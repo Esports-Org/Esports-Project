@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
-const TeamShcema = mongoose.Schema({
+const TeamSchema = mongoose.Schema({
+    tournamentId:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Tournament'
+    },
     name:String,
     players:{
         type:[

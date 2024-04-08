@@ -2,7 +2,9 @@ const mongoose = require("mongoose");
 const validator = require("validator")
 const TournamentSchema = new mongoose.Schema({
     gameAdmin:{
-        type: mongoose.Schema.Types.ObjectId, ref: 'User',
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required:true
     },
     game:{
         type: String,
@@ -12,6 +14,12 @@ const TournamentSchema = new mongoose.Schema({
     StartDate:{
         type:Date,
         required:true
+    },
+    status:{
+        type:String,
+        enum:["upcoming","ongoing","finished","canceled"],
+        required:true,
+        default:"upcoming"
     },
     havePrize:{
         type:Boolean,
