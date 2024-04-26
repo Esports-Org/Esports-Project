@@ -16,6 +16,7 @@ router.put('/editTournament', userController.userEditTournament);
 router.delete('/cancelTournament', userController.userDeleteTournament);
 
 router.post('/joinTeam', userController.joinTeam);
+router.post('/joinTournament', userController.joinTournament);
 router.put('/leaveTeam', userController.leaveTeam);
 router.put('/withdraw', userController.withdrawFromTournament);
 router.put('/removeTeam', userController.removeTeam);

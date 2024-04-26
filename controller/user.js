@@ -7,6 +7,7 @@ const secretKey = "this-key-must-be-changed-in-deployment-and-add-it-to-process-
 
 const userModel = require("../model/user");
 const tokenBlackListModel = require("../model/tokenBlackList");
+const teamModel = require("../model/team");
 
 
 const userController = {};
@@ -105,10 +106,89 @@ userController.userLogout = async (req, res) => {
 }
 
 userController.getUserProfile = async (req, res) => {
+    const userID = req.user.userId;
     try{
-        
+        const user = await userModel.findById(userID);
+        res.status(200).json(user);
     }
     catch(err){
         res.status(500).json(err);
+    }
+}
+
+userController.editUserProfile = async (req, res) => {
+    const {userId} =req.user.userId;
+    const updatedData=req.body;
+    try{
+        const updatedProfile = await userModel.findByIdAndUpdate(userId,updatedData,{new:true});
+        res.status(200).json(updatedProfile);
+    }
+    catch(err){
+        res.status(500).json(err);
+    }
+}
+
+userController.deleteProfile = async (req, res) => {
+    const userId = req.user.userId;
+    try{
+        await userModel.findByIdAndDelete(adminId);
+        res.status(200).json({message:"account deleted successfully"});
+    }
+    catch(err){
+        res.status(500).json(err);
+    }
+}
+
+userController.userCreateTournament = async (req, res) => {
+    const tournamentData = req.body;
+    try{
+        const createdTournament = await tournamentModel.create(tournamentData)
+        res.status(201).json({message:"tournament created",createdTournament})
+    }catch(err){
+        res.status(422).json({message:err.message})
+    }
+}
+
+userController.userEditTournament = async (req, res) => {
+    const {id} = req.params;
+    const updatedData = req.body;
+    try{
+        const updatedTournament = await tournamentModel.findByIdAndUpdate(id,updatedData,{new:true});
+        res.status(200).json({updatedTournament})
+    }catch(err){
+        res.status(422).json({message:err.message})
+    }
+}
+
+userController.userDeleteTournament = async (req, res) => {
+    const {id} = req.params;
+    try{
+        await tournamentModel.findByIdAndUpdate(id,{status:"canceled"});
+        res.status(200).json({message:"tournament cancelled"})
+    }catch(err){
+        res.status(422).json({message:err.message})
+    }
+}
+
+userController.joinTeam = async (req, res) => {
+    const { userId } = req.user.userId;
+    const { teamId , password } = req.body;
+    try{
+        const team = await teamModel.findById(teamId);
+
+        if(team.players.length === team.maxPlayers){
+            return res.status(400).json({message: "the team is full"});
+        }
+
+        if(team.password && team.password !== password){
+            return res.status(400).json({message: "incorrect password"});
+        }
+
+        team.players.push(userId);
+        await team.save();
+        res.status(200).json({message: "joined team successfully"})
+    }
+    catch(err){
+        res.status(500).json({message:err.message})
     }
 }
