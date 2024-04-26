@@ -192,3 +192,68 @@ userController.joinTeam = async (req, res) => {
         res.status(500).json({message:err.message})
     }
 }
+
+userController.joinTournament = async (req, res) => {
+    const { userId } = req.user.userId;
+    const { tournamentId } = req.body;
+    try{
+        const tournament = await tournamentModel.findById(tournamentId);
+
+        tournament.players.push(userId);
+        await tournament.save();
+        res.status(200).json({message: "joined tournament successfully"});
+    }
+    catch(err){
+        res.status(500).json({message:err.message})
+    }
+}
+
+userController.leaveTeam = async (req, res) => {
+    const { userId } = req.user.userId;
+    const { teamId } = req.body;
+    try{
+        const team = teamModel.findById(teamId);
+
+        const index = team.players.indexOf(userId);
+        if (index > -1) { // only splice array when item is found
+            team.players.splice(index, 1); // 2nd parameter means remove one item only
+        }
+
+        await team.save();
+        res.status(200).json({message: "leaved team successfully"})
+    }
+    catch(err){
+        res.status(500).json({message:err.message})
+    }
+}
+
+userController.withdrawFromTournament = async (req, res) => {
+    const { userId } = req.user.userId;
+    const { tournamentId } = req.body;
+    try{
+        const tournament = await tournamentModel.findById(tournamentId);
+
+        const index = tournament.players.indexOf(userId);
+        if (index > -1) { // only splice array when item is found
+            tournament.players.splice(index, 1); // 2nd parameter means remove one item only
+        }
+
+        await tournament.save();
+        res.status(200).json({message: "leaved tournament successfully"})
+    }
+    catch(err){
+        res.status(500).json({message:err.message})
+    }
+}
+
+userController.removeTeam = async (req, res) => {
+    const { teamId } = req.body;
+    try{
+        await userModel.findByIdAndDelete(teamId);
+
+        res.status(200).json({message: "team removed successfully"})
+    }
+    catch(err){
+        res.status(500).json({message:err.message})
+    }
+}
