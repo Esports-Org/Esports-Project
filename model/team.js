@@ -15,10 +15,16 @@ const TeamSchema = mongoose.Schema({
         ],
         default:[]
     },
+    maxPlayers: {
+        type: Number,
+        default: 5,
+        min: 2,
+    },
     password:{
         type:String,
         minLength:6,
         maxLength:20,
+        default: "",
     }
 })
 

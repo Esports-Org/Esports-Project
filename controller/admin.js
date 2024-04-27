@@ -1,6 +1,6 @@
 const userModel = require("../model/user")
 const tournamentModel = require("../model/tournament")
-const tokenBlackListModel = require("../models/tokenBlackList");
+const tokenBlackListModel = require("../model/tokenBlackList");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt")
 
