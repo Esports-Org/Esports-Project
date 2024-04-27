@@ -199,6 +199,10 @@ userController.joinTournament = async (req, res) => {
     try{
         const tournament = await tournamentModel.findById(tournamentId);
 
+        if(tournament.players.length === tournament.numberOfPlayers){
+            return res.status(400).json({message: "tournament is full"});
+        }
+
         tournament.players.push(userId);
         await tournament.save();
         res.status(200).json({message: "joined tournament successfully"});
