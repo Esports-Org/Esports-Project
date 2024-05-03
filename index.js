@@ -20,7 +20,7 @@ app.use("/admin",adminRoute);
 app.use("/tournament",tournamentRoute);
 app.use("/user",userRoute);
 
-app.get((req,res)=>{
+app.get("/",(req,res)=>{
     res.json("hello");
 })
 
