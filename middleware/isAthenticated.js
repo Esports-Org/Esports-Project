@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const tokenBlackListModel = require("../models/tokenBlackList");
+const tokenBlackListModel = require("../model/tokenBlackList");
 const isAuthenticated = (req, res, next) => {
   const token = req.headers.authorization;
   //request doesn't contain a token
