@@ -21,5 +21,4 @@ router.put('/leaveTeam', userController.leaveTeam);
 router.put('/withdraw', userController.withdrawFromTournament);
 router.put('/removeTeam', userController.removeTeam);
 
-
 module.exports = router;
