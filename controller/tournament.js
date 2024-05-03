@@ -1,7 +1,7 @@
 const tournamentModel=require("../model/tournament");
 
 
-async function getTournamets(req,res){
+async function getTournaments(req,res){
     try{
         const tournaments = await tournamentModel.find({});
         res.status(200).json(tournaments);
@@ -10,7 +10,7 @@ async function getTournamets(req,res){
     }
 }
 
-async function getTournametInfo(req,res){
+async function getTournamentInfo(req,res){
     const {id}= req.params;
     try{
         const tournament = await tournamentModel.findById(id)
@@ -26,6 +26,6 @@ async function getTournametInfo(req,res){
 }
 
 module.exports = {
-    getTournamets,
-    getTournametInfo
+    getTournaments,
+    getTournamentInfo
 }
