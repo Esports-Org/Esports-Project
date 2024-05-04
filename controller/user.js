@@ -8,7 +8,7 @@ const secretKey = "this-key-must-be-changed-in-deployment-and-add-it-to-process-
 const userModel = require("../model/user");
 const tokenBlackListModel = require("../model/tokenBlackList");
 const teamModel = require("../model/team");
-
+const tournamentModel =require("../model/tournament")
 
 const userController = {};
 
