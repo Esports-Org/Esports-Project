@@ -114,7 +114,7 @@ async function getProfile(req,res){
 }
 
 async function editProfile(req,res){
-    const {userId} =req.user.user;
+    const {userId} =req.user;
     const updatedData=req.body
     try{
         const updatedProfile =await userModel.findByIdAndUpdate(userId,updatedData,{new:true});

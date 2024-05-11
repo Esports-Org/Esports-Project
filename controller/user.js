@@ -119,7 +119,7 @@ userController.getUserProfile = async (req, res) => {
 }
 
 userController.editUserProfile = async (req, res) => {
-    const {userId} =req.user.userId;
+    const userId =req.user.userId;
     const updatedData=req.body;
     try{
         const updatedProfile = await userModel.findByIdAndUpdate(userId,updatedData,{new:true});
@@ -173,7 +173,7 @@ userController.userDeleteTournament = async (req, res) => {
 }
 
 userController.joinTeam = async (req, res) => {
-    const { userId } = req.user.userId;
+    const  userId  = req.user.userId;
     const { teamId , password } = req.body;
     try{
         const team = await teamModel.findById(teamId);
@@ -196,8 +196,9 @@ userController.joinTeam = async (req, res) => {
 }
 
 userController.joinTournament = async (req, res) => {
-    const { userId } = req.user.userId;
+    const { userId } = req.user;
     const { tournamentId } = req.body;
+    console.log(userId)
     try{
         const tournament = await tournamentModel.findById(tournamentId);
 
@@ -215,7 +216,7 @@ userController.joinTournament = async (req, res) => {
 }
 
 userController.leaveTeam = async (req, res) => {
-    const { userId } = req.user.userId;
+    const  userId  = req.user.userId;
     const { teamId } = req.body;
     try{
         const team = teamModel.findById(teamId);
@@ -234,7 +235,7 @@ userController.leaveTeam = async (req, res) => {
 }
 
 userController.withdrawFromTournament = async (req, res) => {
-    const { userId } = req.user.userId;
+    const userId = req.user.userId;
     const { tournamentId } = req.body;
     try{
         const tournament = await tournamentModel.findById(tournamentId);
