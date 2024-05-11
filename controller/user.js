@@ -57,7 +57,7 @@ userController.userSignup = async (req, res) => {
             authorized:user.isAdmin,
         }
 
-        const token = jwt.sign(content, secretKey, { expiresIn: "3h" });
+        const token = jwt.sign(content, process.env.SECRET_KEY, { expiresIn: "3h" });
         res.status(200).json(token);
     }
     catch(err){
@@ -85,7 +85,7 @@ userController.userLogin = async (req, res) => {
             authorized:user.isAdmin,
         }
 
-        const token = jwt.sign(content, secretKey, { expiresIn: "3h" });
+        const token = jwt.sign(content, process.env.SECRET_KEY, { expiresIn: "3h" });
         res.status(200).json(token);
     }
     catch(err){
@@ -106,7 +106,9 @@ userController.userLogout = async (req, res) => {
 }
 
 userController.getUserProfile = async (req, res) => {
+    console.log("reached");
     const userID = req.user.userId;
+    console.log("error");
     try{
         const user = await userModel.findById(userID);
         res.status(200).json(user);

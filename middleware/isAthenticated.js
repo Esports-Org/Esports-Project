@@ -10,7 +10,7 @@ const isAuthenticated = (req, res, next) => {
     jwt.verify(token, process.env.SECRET_KEY, async (err, user) => {
       try {
         if (err) {
-          res.status(403).json({ message: "token expired" });
+          res.status(403).json({ message: err.message });
         } else {
           const isBlackListed = await tokenBlackListModel.findOne(
             { token: token },

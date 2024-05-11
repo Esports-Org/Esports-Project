@@ -81,7 +81,7 @@ async function login(req,res){
         const isPasswordMatching = await bcrypt.compare(password,user.hashedPassword);
         if(isPasswordMatching)
             {
-                const token = jwt.sign({ userId: user._id, authorized:user.isAdmin }, "ReallySuperStrongIndependantSecretKeyPlus", {
+                const token = jwt.sign({ userId: user._id, authorized:user.isAdmin }, process.env.SECRET_KEY, {
                     expiresIn: "3h",
                   });
                   res.status(200).json(token);
