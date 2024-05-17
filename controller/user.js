@@ -221,9 +221,12 @@ userController.addTeam = async(req,res)=>{
     const teamData = req.body;
     try{
         const createdTeam = await teamModel.create(teamData);
+        const tournamentData = await tournamentModel.findById(teamData.tournamentId);
+        tournamentData.teams.push(createdTeam._id);
+        tournamentData.save();
         res.status(201).json({message:"team created"});
     }catch(err){
-        res.status(422).json({message:"an error occured"});
+        res.status(422).json({message:err.message});
     }
 }
 

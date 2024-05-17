@@ -22,7 +22,6 @@ const TeamSchema = mongoose.Schema({
     },
     password:{
         type:String,
-        minLength:6,
         maxLength:20,
         default: "",
     }
