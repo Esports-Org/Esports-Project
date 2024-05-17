@@ -198,12 +198,13 @@ userController.joinTeam = async (req, res) => {
 userController.joinTournament = async (req, res) => {
     const { userId } = req.user;
     const { tournamentId } = req.body;
-    console.log(userId)
     try{
         const tournament = await tournamentModel.findById(tournamentId);
 
         if(tournament.players.length === tournament.numberOfPlayers){
             return res.status(400).json({message: "tournament is full"});
+        }else if (tournament.players.includes(userId)){
+            return res.status(400).json({message: "player already joined"});
         }
 
         tournament.players.push(userId);
