@@ -216,6 +216,17 @@ userController.joinTournament = async (req, res) => {
     }
 }
 
+userController.addTeam = async(req,res)=>{
+    const  userId  = req.user.userId;
+    const teamData = req.body;
+    try{
+        const createdTeam = await teamModel.create(teamData);
+        res.status(201).json({message:"team created"});
+    }catch(err){
+        res.status(422).json({message:"an error occured"});
+    }
+}
+
 userController.leaveTeam = async (req, res) => {
     const  userId  = req.user.userId;
     const { teamId } = req.body;
@@ -229,6 +240,18 @@ userController.leaveTeam = async (req, res) => {
 
         await team.save();
         res.status(200).json({message: "leaved team successfully"})
+    }
+    catch(err){
+        res.status(500).json({message:err.message})
+    }
+}
+
+userController.removeTeam = async (req, res) => {
+    const { teamId } = req.body;
+    try{
+        await userModel.findByIdAndDelete(teamId);
+
+        res.status(200).json({message: "team removed successfully"})
     }
     catch(err){
         res.status(500).json({message:err.message})
@@ -253,18 +276,5 @@ userController.withdrawFromTournament = async (req, res) => {
         res.status(500).json({message:err.message})
     }
 }
-
-userController.removeTeam = async (req, res) => {
-    const { teamId } = req.body;
-    try{
-        await userModel.findByIdAndDelete(teamId);
-
-        res.status(200).json({message: "team removed successfully"})
-    }
-    catch(err){
-        res.status(500).json({message:err.message})
-    }
-}
-
 
 module.exports = userController;
