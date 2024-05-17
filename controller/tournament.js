@@ -3,7 +3,9 @@ const tournamentModel=require("../model/tournament");
 
 async function getTournaments(req,res){
     try{
-        const tournaments = await tournamentModel.find({});
+        const tournaments = await tournamentModel.find({})
+        .populate("teams.players")
+        .populate("players");
         res.status(200).json(tournaments);
     }catch(err){
         res.status(422).json({"message":err.message});

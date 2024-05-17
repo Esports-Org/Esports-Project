@@ -186,6 +186,10 @@ userController.joinTeam = async (req, res) => {
             return res.status(400).json({message: "incorrect password"});
         }
 
+        if(team.players.includes(userId)){
+            return res.status(400).json({message: "player already joined"});
+        }
+
         team.players.push(userId);
         await team.save();
         res.status(200).json({message: "joined team successfully"})
