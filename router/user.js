@@ -14,6 +14,7 @@ router.delete('/deleteProfile',isAuthenticated, userController.deleteProfile);
 router.post('/createTournament',isAuthenticated, userController.userCreateTournament);
 router.put('/editTournament',isAuthenticated, userController.userEditTournament);
 router.delete('/cancelTournament',isAuthenticated, userController.userDeleteTournament);
+router.get('/playerRole/:id', isAuthenticated, userController.userRoleInTournament);
 
 router.post('/addTeam', isAuthenticated, userController.addTeam);
 router.post('/joinTeam',isAuthenticated, userController.joinTeam);

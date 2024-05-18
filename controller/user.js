@@ -173,6 +173,31 @@ userController.userDeleteTournament = async (req, res) => {
     }
 }
 
+userController.userRoleInTournament = async (req,res)=>{
+    const {tournamentId}= req.params;
+    const userId = req.user.userId;
+    try{
+        const tournament = await tournamentModel.findById(tournamentId);
+        if(tournament.gameAdmin.toString()===userId){
+            return res.status(200).json({role:"admin"});
+        }else if (tournament.isTeamMatch){
+            if(tournament.teams.includes(userId)){
+                return res.status(200).json({role:"player"});
+            }else{
+                return res.status(400).json({message:"player not in tournament"});
+            }
+        }else{
+            if(tournament.players.includes(userId)){
+                return res.status(200).json({role:"player"});
+            }else{
+                return res.status(400).json({message:"player not in tournament"});
+            }
+        }
+    }catch(err){
+        res.status(422).json({"message":err.message});
+    }
+}
+
 userController.joinTeam = async (req, res) => {
     const  userId  = req.user.userId;
     const { teamId , password } = req.body;
