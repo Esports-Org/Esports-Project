@@ -142,7 +142,9 @@ userController.deleteProfile = async (req, res) => {
 }
 
 userController.userCreateTournament = async (req, res) => {
+    const userId = req.user.userId;
     const tournamentData = req.body;
+    tournamentData.gameAdmin = userId;
     try{
         const createdTournament = await tournamentModel.create(tournamentData)
         res.status(201).json({message:"tournament created",createdTournament})
