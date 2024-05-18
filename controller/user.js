@@ -154,10 +154,9 @@ userController.userCreateTournament = async (req, res) => {
 }
 
 userController.userEditTournament = async (req, res) => {
-    const {id} = req.params;
     const updatedData = req.body;
     try{
-        const updatedTournament = await tournamentModel.findByIdAndUpdate(id,updatedData,{new:true});
+        const updatedTournament = await tournamentModel.findByIdAndUpdate(updatedData._id,updatedData,{new:true});
         res.status(200).json({updatedTournament})
     }catch(err){
         res.status(422).json({message:err.message})
