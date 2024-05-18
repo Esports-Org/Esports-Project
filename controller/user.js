@@ -174,10 +174,11 @@ userController.userDeleteTournament = async (req, res) => {
 }
 
 userController.userRoleInTournament = async (req,res)=>{
-    const {tournamentId}= req.params;
+    const {id} = req.params;
     const userId = req.user.userId;
     try{
-        const tournament = await tournamentModel.findById(tournamentId);
+        const tournament = await tournamentModel.findById(id);
+        console.log(tournament)
         if(tournament.gameAdmin.toString()===userId){
             return res.status(200).json({role:"admin"});
         }else if (tournament.isTeamMatch){
