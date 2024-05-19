@@ -20,6 +20,12 @@ const TeamSchema = mongoose.Schema({
         default: 5,
         min: 2,
     },
+    status:{
+        type:String,
+        enum:["remaining","lost"],
+        required:true,
+        default:"remaining"
+    },
     password:{
         type:String,
         maxLength:20,

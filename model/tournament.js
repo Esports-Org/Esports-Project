@@ -82,15 +82,18 @@ const TournamentSchema = new mongoose.Schema({
         ],
         default:[]
     },
-    players:{
-        type:[
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'User'
-            }
-        ],
-        default:[]
-    },
+    players:[{
+        player: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        status:{
+            type:String,
+        enum:["remaining","lost"],
+        required:true,
+        default:"remaining"
+        }
+}],
     winningTeam:{
         type:{ 
             type: mongoose.Schema.Types.ObjectId,
