@@ -226,6 +226,19 @@ userController.joinTeam = async (req, res) => {
     }
 }
 
+userController.editTeam = async(req,res)=>{
+    const id = req.params;
+    try{
+    const updatedTeam = teamModel.findById(id);
+    updatedTeam.status ="lost";
+    updatedTeam.save();
+    res.status(200).json({message:"team lost"})
+
+    }catch(err){
+        res.status(422).json({message:err.message})
+    }
+}
+
 userController.joinTournament = async (req, res) => {
     const { userId } = req.user;
     const { tournamentId } = req.body;
