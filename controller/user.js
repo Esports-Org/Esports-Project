@@ -227,7 +227,7 @@ userController.joinTeam = async (req, res) => {
 }
 
 userController.editTeam = async(req,res)=>{
-    const id = req.params;
+    const {id} = req.params;
     try{
     const updatedTeam = await teamModel.findById(id);
     updatedTeam.status ="lost";
