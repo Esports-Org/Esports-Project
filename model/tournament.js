@@ -94,6 +94,27 @@ const TournamentSchema = new mongoose.Schema({
         default:"remaining"
         }
 }],
+    teamMatches:[{
+        team1: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'team'
+        },
+        team2: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'team'
+        }
+
+    }],
+    playerMatches:[{
+        player1: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }, 
+        player2: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    }],
     winningTeam:{
         type:{ 
             type: mongoose.Schema.Types.ObjectId,
