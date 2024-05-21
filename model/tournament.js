@@ -94,7 +94,8 @@ const TournamentSchema = new mongoose.Schema({
         default:"remaining"
         }
 }],
-    teamMatches:[{
+    teamMatches:{
+        type:[{
         team1: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'team'
@@ -105,7 +106,10 @@ const TournamentSchema = new mongoose.Schema({
         }
 
     }],
-    playerMatches:[{
+    defualt:[]
+},
+    playerMatches:{
+        type:[{
         player1: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
@@ -115,6 +119,7 @@ const TournamentSchema = new mongoose.Schema({
             ref: 'User'
         }
     }],
+    default:[]},
     winningTeam:{
         type:{ 
             type: mongoose.Schema.Types.ObjectId,
