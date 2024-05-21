@@ -98,11 +98,11 @@ const TournamentSchema = new mongoose.Schema({
         type:[{
         team1: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'team'
+            ref: 'Team'
         },
         team2: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'team'
+            ref: 'Team'
         }
 
     }],
