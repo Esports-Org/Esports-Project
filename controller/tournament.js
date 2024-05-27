@@ -19,7 +19,6 @@ async function getTournamentInfo(req,res){
         .populate("gameAdmin")
         .populate("teams")
         .populate("players")
-        .populate("players.player")
         .populate("winningTeam")
         .populate("winningUser")
         .populate("teamMatches.team1")
