@@ -269,7 +269,7 @@ userController.addTeam = async(req,res)=>{
         tournamentData.teams.push(createdTeam._id);
         tournamentData.save();
         tournamentData.populate("teams");
-        res.status(201).json({message:"team created", teams:tournamentData.teams});
+        res.status(201).json({message:"team created", newTeam:createdTeam});
     }catch(err){
         res.status(422).json({message:err.message});
     }
