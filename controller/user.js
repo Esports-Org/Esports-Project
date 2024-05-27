@@ -247,8 +247,10 @@ userController.joinTournament = async (req, res) => {
 
         if(tournament.players.length === tournament.numberOfPlayers){
             return res.status(400).json({message: "tournament is full"});
-        }else if (tournament.players.includes(userId)){
-            return res.status(400).json({message: "player already joined"});
+        }
+        for(let i=0;i<tournament.players.length;i++){
+            if(tournament.players[i]._id===userId)
+                return res.status(400).json({message:"player already joined"})
         }
 
         tournament.players.push(userId);
