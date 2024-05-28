@@ -254,7 +254,7 @@ userController.joinTournament = async (req, res) => {
                 return res.status(400).json({message:"player already joined"})
         }
 
-        tournament.players.push(userId);
+        tournament.players.push({player:userId});
         await tournament.save();
         res.status(200).json({message: "joined tournament successfully"});
     }
