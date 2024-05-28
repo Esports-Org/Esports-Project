@@ -115,12 +115,26 @@ const TournamentSchema = new mongoose.Schema({
     playerMatches:{
         type:[{
         player1: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
+            player:{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User'
+            },
+            status:{
+                type: String,
+                    enum: ["remaining", "lost"], // Add enum values as needed
+                    default: "remaining"
+            }
         }, 
         player2: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
+            player:{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User'
+            },
+            status:{
+                type: String,
+                    enum: ["remaining", "lost"], // Add enum values as needed
+                    default: "remaining"
+            }
         }
     }],
     default:[]},
