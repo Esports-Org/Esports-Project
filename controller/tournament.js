@@ -23,8 +23,8 @@ async function getTournamentInfo(req,res){
         .populate("winningUser")
         .populate("teamMatches.team1")
         .populate("teamMatches.team2")
-        .populate("playerMatches.player1.player")
-        .populate("playerMatches.player2.player");
+        .populate("playerMatches.player1")
+        .populate("playerMatches.player2");
         res.status(200).json(tournament);
     }catch(err){
         res.status(422).json({"message":err.message});
