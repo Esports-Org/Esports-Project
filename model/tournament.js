@@ -88,7 +88,6 @@ const TournamentSchema = new mongoose.Schema({
                 player: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: 'User',
-                    required: true
                 },
                 status: {
                     type: String,
