@@ -18,7 +18,7 @@ async function getTournamentInfo(req,res){
         const tournament = await tournamentModel.findById(id)
         .populate("gameAdmin")
         .populate("teams")
-        .populate("players")
+        .populate("players.player")
         .populate("winningTeam")
         .populate("winningUser")
         .populate("teamMatches.team1")
