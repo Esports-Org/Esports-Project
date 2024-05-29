@@ -18,7 +18,7 @@ router.get('/playerRole/:id', isAuthenticated, userController.userRoleInTourname
 
 router.post('/addTeam', isAuthenticated, userController.addTeam);
 router.post('/joinTeam',isAuthenticated, userController.joinTeam);
-router.put('/editTeam/:id',isAuthenticated, userController.editTeam);
+router.put('/editTeam/:id', userController.editTeam);
 router.post('/joinTournament',isAuthenticated, userController.joinTournament);
 router.put('/leaveTeam',isAuthenticated, userController.leaveTeam);
 router.put('/withdraw',isAuthenticated, userController.withdrawFromTournament);
