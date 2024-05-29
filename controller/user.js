@@ -133,7 +133,7 @@ userController.editUserProfile = async (req, res) => {
 userController.deleteProfile = async (req, res) => {
     const userId = req.user.userId;
     try{
-        await userModel.findByIdAndDelete(adminId);
+        await userModel.findByIdAndDelete(userId);
         res.status(200).json({message:"account deleted successfully"});
     }
     catch(err){
